@@ -12,14 +12,14 @@ namespace MarsRover
         public int X_Point { get; set; }
         public int Y_Point { get; set; }
         public IDirection Direction { get; set; }
-        private readonly EdgeLimits _limits;
+        public EdgeLimits Limits { get; }
 
         public Vehicle(int xPoint, int yPoint, IDirection direction, EdgeLimits limits)
         {
             X_Point = xPoint;
             Y_Point = yPoint;
             Direction = direction;
-            _limits = limits;
+            Limits = limits;
         }
 
         public void MoveForward()
