@@ -1,0 +1,8 @@
+c:\users\rodrigad\documents\visual studio 2015\Projects\MarsRover\MarsRover\bin\Debug\MarsRover.exe.config
+c:\users\rodrigad\documents\visual studio 2015\Projects\MarsRover\MarsRover\bin\Debug\MarsRover.exe
+c:\users\rodrigad\documents\visual studio 2015\Projects\MarsRover\MarsRover\bin\Debug\MarsRover.pdb
+c:\users\rodrigad\documents\visual studio 2015\Projects\MarsRover\MarsRover\bin\Debug\nunit.framework.dll
+c:\users\rodrigad\documents\visual studio 2015\Projects\MarsRover\MarsRover\bin\Debug\nunit.framework.xml
+c:\users\rodrigad\documents\visual studio 2015\Projects\MarsRover\MarsRover\obj\Debug\MarsRover.csprojResolveAssemblyReference.cache
+c:\users\rodrigad\documents\visual studio 2015\Projects\MarsRover\MarsRover\obj\Debug\MarsRover.exe
+c:\users\rodrigad\documents\visual studio 2015\Projects\MarsRover\MarsRover\obj\Debug\MarsRover.pdb
