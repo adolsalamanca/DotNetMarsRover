@@ -8,17 +8,15 @@ using NUnit.Framework;
 
 namespace MarsRover.Test
 {
-    public class VehicleMovementLimitTests
+    public class ControlLogicTests
     {
         private List<IDirection> _listOfDirections;
         private int _xPoint, _yPoint;
-        private EdgeLimits _limits;
         private Vehicle _vehicle;
 
         [SetUp]
         public void SetUp()
         {
-            _limits = new EdgeLimits(0, 0, 0, 0);
         }
 
         [TearDown]
@@ -26,7 +24,6 @@ namespace MarsRover.Test
         {
             _listOfDirections = null;
             _vehicle = null;
-            _limits = null;
         }
 
         
@@ -34,10 +31,9 @@ namespace MarsRover.Test
         public void VehicleNorthOrientedGoesForward_ButIsAlreadyInTheLimit_ThenCannotMove()
         {
             //Arrange
+            _vehicle = new Vehicle(0,0, new NorthDirection());
             int oldPosition = _vehicle.Y_Point;
-            
-            _vehicle = new Vehicle(0,0, new NorthDirection(),_limits);
-            
+
             //Act
             _vehicle.MoveForward();
 
@@ -50,9 +46,8 @@ namespace MarsRover.Test
         public void VehicleNorthOrientedGoesBackward_ButIsAlreadyInTheLimit_ThenCannotMove()
         {
             //Arrange
+            _vehicle = new Vehicle(0, 0, new NorthDirection());
             int oldPosition = _vehicle.Y_Point;
-
-            _vehicle = new Vehicle(0, 0, new NorthDirection(), _limits);
 
             //Act
             _vehicle.MoveBackward();
@@ -66,7 +61,7 @@ namespace MarsRover.Test
         public void VehicleSouthOrientedGoesForward_ButIsAlreadyInTheLimit_ThenCannotMove()
         {
             //Arrange
-            _vehicle = new Vehicle(0, 0, new SouthDirection(), _limits);
+            _vehicle = new Vehicle(0, 0, new SouthDirection());
             int oldPosition = _vehicle.Y_Point;
 
             //Act
@@ -81,7 +76,7 @@ namespace MarsRover.Test
         public void VehicleSouthOrientedGoesBackward_ButIsAlreadyInTheLimit_ThenCannotMove()
         {
             //Arrange
-            _vehicle = new Vehicle(0, 0, new SouthDirection(), _limits);
+            _vehicle = new Vehicle(0, 0, new SouthDirection());
             int oldPosition = _vehicle.Y_Point;
 
             //Act
@@ -95,7 +90,7 @@ namespace MarsRover.Test
         public void VehicleEasthOrientedGoesForward_ButIsAlreadyInTheLimit_ThenCannotMove()
         {
             //Arrange
-            _vehicle = new Vehicle(0, 0, new EastDirection(), _limits);
+            _vehicle = new Vehicle(0, 0, new EastDirection());
             int oldPosition = _vehicle.Y_Point;
 
             //Act
@@ -110,7 +105,7 @@ namespace MarsRover.Test
         public void VehicleEasthOrientedGoesBackward_ButIsAlreadyInTheLimit_ThenCannotMove()
         {
             //Arrange
-            _vehicle = new Vehicle(0, 0, new EastDirection(), _limits);
+            _vehicle = new Vehicle(0, 0, new EastDirection());
             int oldPosition = _vehicle.Y_Point;
 
             //Act
@@ -125,7 +120,7 @@ namespace MarsRover.Test
         public void VehicleWestOrientedGoesForward_ButIsAlreadyInTheLimit_ThenCannotMove()
         {
             //Arrange
-            _vehicle = new Vehicle(0, 0, new WestDirection(), _limits);
+            _vehicle = new Vehicle(0, 0, new WestDirection());
             int oldPosition = _vehicle.Y_Point;
 
             //Act
@@ -141,7 +136,7 @@ namespace MarsRover.Test
         public void VehicleWestOrientedGoesBackward_ButIsAlreadyInTheLimit_ThenCannotMove()
         {
             //Arrange
-            _vehicle = new Vehicle(0, 0, new WestDirection(), _limits);
+            _vehicle = new Vehicle(0, 0, new WestDirection());
             int oldPosition = _vehicle.Y_Point;
 
             //Act

@@ -4,12 +4,12 @@
     {
         public void MoveForward(Vehicle spaceCraft)
         {
-            spaceCraft.X_Point--;
+                spaceCraft.X_Point--;
         }
 
         public void MoveBackward(Vehicle spaceCraft)
         {
-            spaceCraft.X_Point++;
+                spaceCraft.X_Point++;
         }
 
         public IDirection TurnLeft()

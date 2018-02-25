@@ -16,7 +16,6 @@ namespace MarsRover.Test
         {
             _xPoint = 123;
             _yPoint = 567;
-            _limits = new EdgeLimits(8888,8888,8888,8888);
         }
 
         [TearDown]
@@ -24,7 +23,6 @@ namespace MarsRover.Test
         {
             _xPoint = 0;
             _yPoint = 0;
-            _limits = null;
             _vehicle = null;
         }
 
@@ -32,27 +30,27 @@ namespace MarsRover.Test
         public void VehicleGoesForward__IfIsNorthOriented_ThenGoesUp()
         {
             //Arrange
-            _vehicle = new Vehicle(_xPoint, _yPoint, new NorthDirection(), _limits);
+            _vehicle = new Vehicle(_xPoint, _yPoint, new NorthDirection());
 
             //Act
             _vehicle.MoveForward();
 
             //Assert
-            Assert.IsTrue(_vehicle.Y_Point == _yPoint+1);
+            Assert.IsTrue(_vehicle.Y_Point == _yPoint + 1);
             
         }
 
         [Test]
-        public void VehicleGoesForward__IfIsNorthOriented_ThenGoesDown()
+        public void VehicleGoesBackward__IfIsNorthOriented_ThenGoesDown()
         {
             //Arrange
-            _vehicle = new Vehicle(_xPoint, _yPoint, new NorthDirection(), _limits);
+            _vehicle = new Vehicle(_xPoint, _yPoint, new NorthDirection());
 
             //Act
             _vehicle.MoveBackward();
 
             //Assert
-            Assert.IsTrue(_vehicle.Y_Point == _yPoint -1);
+            Assert.IsTrue(_vehicle.Y_Point == _yPoint - 1);
 
         }
 
@@ -60,7 +58,7 @@ namespace MarsRover.Test
         public void VehicleGoesForward__IfIsSouthOriented_ThenGoesDown()
         {
             //Arrange
-            _vehicle = new Vehicle(_xPoint, _yPoint, new SouthDirection(), _limits);
+            _vehicle = new Vehicle(_xPoint, _yPoint, new SouthDirection());
 
             //Act
             _vehicle.MoveForward();
@@ -74,7 +72,7 @@ namespace MarsRover.Test
         public void VehicleGoesForward__IfIsSouthOriented_ThenGoesUp()
         {
             //Arrange
-            _vehicle = new Vehicle(_xPoint, _yPoint, new SouthDirection(), _limits);
+            _vehicle = new Vehicle(_xPoint, _yPoint, new SouthDirection());
 
             //Act
             _vehicle.MoveBackward();
@@ -89,7 +87,7 @@ namespace MarsRover.Test
         public void VehicleGoesForward__IfIsEastOriented_ThenGoesRight()
         {
             //Arrange
-            _vehicle = new Vehicle(_xPoint, _yPoint, new EastDirection(), _limits);
+            _vehicle = new Vehicle(_xPoint, _yPoint, new EastDirection());
 
             //Act
             _vehicle.MoveForward();
@@ -103,7 +101,7 @@ namespace MarsRover.Test
         public void VehicleGoesBackward__IfIsEastOriented_ThenGoesLeft()
         {
             //Arrange
-            _vehicle = new Vehicle(_xPoint, _yPoint, new EastDirection(), _limits);
+            _vehicle = new Vehicle(_xPoint, _yPoint, new EastDirection());
 
             //Act
             _vehicle.MoveBackward();
@@ -117,7 +115,7 @@ namespace MarsRover.Test
         public void VehicleGoesForward__IfIsWestOriented_ThenGoesLeft()
         {
             //Arrange
-            _vehicle = new Vehicle(_xPoint, _yPoint, new WestDirection(), _limits);
+            _vehicle = new Vehicle(_xPoint, _yPoint, new WestDirection());
 
             //Act
             _vehicle.MoveForward();
@@ -131,7 +129,7 @@ namespace MarsRover.Test
         public void VehicleGoesBackward__IfIsWestOriented_ThenGoesRight()
         {
             //Arrange
-            _vehicle = new Vehicle(_xPoint, _yPoint, new WestDirection(), _limits);
+            _vehicle = new Vehicle(_xPoint, _yPoint, new WestDirection());
 
             //Act
             _vehicle.MoveBackward();
