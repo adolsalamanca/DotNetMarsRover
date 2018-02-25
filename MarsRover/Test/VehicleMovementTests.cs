@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace MarsRover.Test
 {
     [TestFixture]
-    public class VehicleTests
+    public class VehicleMovementTests
     {
         private int _xPoint, _yPoint;
         private Coordinates _orientation;
@@ -30,7 +30,7 @@ namespace MarsRover.Test
         }
 
         [Test]
-        public void VehicleGoesUp__IfIsNorthOriented_AndGoesForward()
+        public void VehicleGoesForward__IfIsNorthOriented_ThenGoesUp()
         {
             //Arrange
             _orientation = Coordinates.North;
@@ -45,7 +45,7 @@ namespace MarsRover.Test
         }
 
         [Test]
-        public void VehicleGoesDown__IfIsNorthOriented_AndGoesBackward()
+        public void VehicleGoesForward__IfIsNorthOriented_ThenGoesDown()
         {
             //Arrange
             _orientation = Coordinates.South;
@@ -60,7 +60,7 @@ namespace MarsRover.Test
         }
 
         [Test]
-        public void VehicleGoesDown__IfIsSouthOriented_AndGoesForward()
+        public void VehicleGoesForward__IfIsSouthOriented_ThenGoesDown()
         {
             //Arrange
             _orientation = Coordinates.South;
@@ -75,7 +75,7 @@ namespace MarsRover.Test
         }
 
         [Test]
-        public void VehicleGoesUp__IfIsSouthOriented_AndGoesBackward()
+        public void VehicleGoesForward__IfIsSouthOriented_ThenGoesUp()
         {
             //Arrange
             _orientation = Coordinates.South;
@@ -88,5 +88,67 @@ namespace MarsRover.Test
             Assert.IsTrue(_vehicle.Y_Point == _yPoint + 1);
 
         }
+
+
+        [Test]
+        public void VehicleGoesForward__IfIsEastOriented_ThenGoesRight()
+        {
+            //Arrange
+            _orientation = Coordinates.South;
+            _vehicle = new Vehicle(_xPoint, _yPoint, new EastDirection(), _orientation, _limits);
+
+            //Act
+            _vehicle.MoveForward();
+
+            //Assert
+            Assert.IsTrue(_vehicle.X_Point == _xPoint + 1);
+
+        }
+
+        [Test]
+        public void VehicleGoesBackward__IfIsEastOriented_ThenGoesLeft()
+        {
+            //Arrange
+            _orientation = Coordinates.South;
+            _vehicle = new Vehicle(_xPoint, _yPoint, new EastDirection(), _orientation, _limits);
+
+            //Act
+            _vehicle.MoveBackward();
+
+            //Assert
+            Assert.IsTrue(_vehicle.X_Point == _xPoint - 1);
+
+        }
+
+        [Test]
+        public void VehicleGoesForward__IfIsWestOriented_ThenGoesLeft()
+        {
+            //Arrange
+            _orientation = Coordinates.South;
+            _vehicle = new Vehicle(_xPoint, _yPoint, new WestDirection(), _orientation, _limits);
+
+            //Act
+            _vehicle.MoveForward();
+
+            //Assert
+            Assert.IsTrue(_vehicle.X_Point == _xPoint - 1);
+
+        }
+
+        [Test]
+        public void VehicleGoesBackward__IfIsWestOriented_ThenGoesRight()
+        {
+            //Arrange
+            _orientation = Coordinates.South;
+            _vehicle = new Vehicle(_xPoint, _yPoint, new WestDirection(), _orientation, _limits);
+
+            //Act
+            _vehicle.MoveBackward();
+
+            //Assert
+            Assert.IsTrue(_vehicle.X_Point == _xPoint + 1);
+
+        }
+
     }
 }
