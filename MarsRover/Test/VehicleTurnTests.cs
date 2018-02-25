@@ -116,7 +116,7 @@ namespace MarsRover.Test
         public void VehicleTurnLeft__IfIsWestOriented_ThenTurnsDown()
         {
             //Arrange
-            _vehicle = new Vehicle(_xPoint, _yPoint, new EastDirection(), _limits);
+            _vehicle = new Vehicle(_xPoint, _yPoint, new WestDirection(), _limits);
 
             //Act
             _vehicle.TurnLeft();
@@ -130,7 +130,7 @@ namespace MarsRover.Test
         public void VehicleTurnRight__IfIsWestOriented_ThenTurnsDownUp()
         {
             //Arrange
-            _vehicle = new Vehicle(_xPoint, _yPoint, new EastDirection(), _limits);
+            _vehicle = new Vehicle(_xPoint, _yPoint, new WestDirection(), _limits);
 
             //Act
             _vehicle.TurnRight();

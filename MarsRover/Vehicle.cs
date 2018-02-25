@@ -34,10 +34,12 @@ namespace MarsRover
 
         public void TurnLeft()
         {
+            Direction = Direction.TurnLeft();
         }
 
         public void TurnRight()
         {
+            Direction = Direction.TurnRight();
         }
 
     }
