@@ -37,8 +37,7 @@ namespace MarsRover
                 }
                 catch (ArgumentException)
                 {
-                    System.Diagnostics.Debug.WriteLine(
-                        "Invalid command entered");
+                    System.Diagnostics.Debug.WriteLine("Invalid command entered");
                 }
             }
         }
@@ -52,6 +51,7 @@ namespace MarsRover
                     if (ValidateMovement())
                     {
                         _spaceCraft.MoveForward();
+                        System.Diagnostics.Debug.WriteLine("Succesfully went forward");
                     }
 
                     break;
@@ -61,16 +61,19 @@ namespace MarsRover
                     if (ValidateMovement())
                     {
                         _spaceCraft.MoveBackward();
+                        System.Diagnostics.Debug.WriteLine("Succesfully went backwards");
                     }
                     
                     break;
 
                 case Command.L:
                     _spaceCraft.TurnLeft();
+                    System.Diagnostics.Debug.WriteLine("Succesfully turned left");
                     break;
 
                 case Command.R:
                     _spaceCraft.TurnRight();
+                    System.Diagnostics.Debug.WriteLine("Succesfully turned right");
                     break;
 
                 default:

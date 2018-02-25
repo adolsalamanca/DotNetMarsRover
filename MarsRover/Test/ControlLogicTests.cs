@@ -10,19 +10,42 @@ namespace MarsRover.Test
 {
     public class ControlLogicTests
     {
-        private List<IDirection> _listOfDirections;
         private int _xPoint, _yPoint;
+        private ControlLogic _controlLogic;
+        private IDirection _direction;
         private Vehicle _vehicle;
+        private EdgeLimits _restrictiveLimits,_permissiveLimits;
+        private List<Obstacle> _obstaclesEmptyList, _obstaclesWithItems;
+        private List<Command> _commandList;
 
         [SetUp]
         public void SetUp()
         {
+            _xPoint = 0;
+            _yPoint = 0;
+
+            _restrictiveLimits = new EdgeLimits(0,0,0,0);
+            _obstaclesEmptyList = new List<Obstacle>();
+            _obstaclesWithItems = new List<Obstacle>()
+            {
+                new Obstacle(0,1),
+                new Obstacle(1,0),
+                new Obstacle(0,-1),
+                new Obstacle(0,-1)
+            };
+
+            _permissiveLimits = new EdgeLimits(8888, 8888, 8888, 8888);
+            _commandList = new List<Command>()
+            {
+                Command.F,
+                Command.B,
+            };
+
         }
 
         [TearDown]
         public void TearDown()
         {
-            _listOfDirections = null;
             _vehicle = null;
         }
 
@@ -30,122 +53,142 @@ namespace MarsRover.Test
        [Test]
         public void VehicleNorthOrientedGoesForward_ButIsAlreadyInTheLimit_ThenCannotMove()
         {
-            //Arrange
-            _vehicle = new Vehicle(0,0, new NorthDirection());
-            int oldPosition = _vehicle.Y_Point;
+            //
+            _direction = new NorthDirection();
+            _vehicle = new Vehicle(_xPoint, _yPoint, _direction);
+            _controlLogic = new ControlLogic(_vehicle, _restrictiveLimits, _obstaclesEmptyList);
 
             //Act
-            _vehicle.MoveForward();
+            _controlLogic.ExecuteCommands(_commandList);
 
             //Assert
+            Assert.AreEqual(_vehicle.X_Point, _xPoint);
+            Assert.AreEqual(_vehicle.Y_Point, _yPoint);
 
-            Assert.AreEqual(oldPosition, _vehicle.Y_Point);
-        }
-
-        [Test]
-        public void VehicleNorthOrientedGoesBackward_ButIsAlreadyInTheLimit_ThenCannotMove()
-        {
-            //Arrange
-            _vehicle = new Vehicle(0, 0, new NorthDirection());
-            int oldPosition = _vehicle.Y_Point;
-
-            //Act
-            _vehicle.MoveBackward();
-
-            //Assert
-
-            Assert.AreEqual(oldPosition, _vehicle.Y_Point);
         }
 
         [Test]
         public void VehicleSouthOrientedGoesForward_ButIsAlreadyInTheLimit_ThenCannotMove()
         {
-            //Arrange
-            _vehicle = new Vehicle(0, 0, new SouthDirection());
-            int oldPosition = _vehicle.Y_Point;
+            //
+            _direction = new SouthDirection();
+            _vehicle = new Vehicle(_xPoint, _yPoint, _direction);
+            _controlLogic = new ControlLogic(_vehicle, _restrictiveLimits, _obstaclesEmptyList);
 
             //Act
-            _vehicle.MoveForward();
+            _controlLogic.ExecuteCommands(_commandList);
 
             //Assert
-            Assert.AreEqual(oldPosition, _vehicle.Y_Point);
-        }
+            Assert.AreEqual(_vehicle.X_Point, _xPoint);
+            Assert.AreEqual(_vehicle.Y_Point, _yPoint);
 
-
-        [Test]
-        public void VehicleSouthOrientedGoesBackward_ButIsAlreadyInTheLimit_ThenCannotMove()
-        {
-            //Arrange
-            _vehicle = new Vehicle(0, 0, new SouthDirection());
-            int oldPosition = _vehicle.Y_Point;
-
-            //Act
-            _vehicle.MoveBackward();
-
-            //Assert
-            Assert.AreEqual(oldPosition, _vehicle.Y_Point);
         }
 
         [Test]
-        public void VehicleEasthOrientedGoesForward_ButIsAlreadyInTheLimit_ThenCannotMove()
+        public void VehicleEastOrientedGoesForward_ButIsAlreadyInTheLimit_ThenCannotMove()
         {
-            //Arrange
-            _vehicle = new Vehicle(0, 0, new EastDirection());
-            int oldPosition = _vehicle.Y_Point;
+            //
+            _direction = new EastDirection();
+            _vehicle = new Vehicle(_xPoint, _yPoint, _direction);
+            _controlLogic = new ControlLogic(_vehicle, _restrictiveLimits, _obstaclesEmptyList);
 
             //Act
-            _vehicle.MoveForward();
+            _controlLogic.ExecuteCommands(_commandList);
 
             //Assert
+            Assert.AreEqual(_vehicle.X_Point, _xPoint);
+            Assert.AreEqual(_vehicle.Y_Point, _yPoint);
 
-            Assert.AreEqual(oldPosition, _vehicle.X_Point);
-        }
-
-        [Test]
-        public void VehicleEasthOrientedGoesBackward_ButIsAlreadyInTheLimit_ThenCannotMove()
-        {
-            //Arrange
-            _vehicle = new Vehicle(0, 0, new EastDirection());
-            int oldPosition = _vehicle.Y_Point;
-
-            //Act
-            _vehicle.MoveBackward();
-
-            //Assert
-
-            Assert.AreEqual(oldPosition, _vehicle.X_Point);
         }
 
         [Test]
         public void VehicleWestOrientedGoesForward_ButIsAlreadyInTheLimit_ThenCannotMove()
         {
-            //Arrange
-            _vehicle = new Vehicle(0, 0, new WestDirection());
-            int oldPosition = _vehicle.Y_Point;
+            //
+            _direction = new WestDirection();
+            _vehicle = new Vehicle(_xPoint, _yPoint, _direction);
+            _controlLogic = new ControlLogic(_vehicle, _restrictiveLimits, _obstaclesEmptyList);
 
             //Act
-            _vehicle.MoveForward();
+            _controlLogic.ExecuteCommands(_commandList);
 
             //Assert
+            Assert.AreEqual(_vehicle.X_Point, _xPoint);
+            Assert.AreEqual(_vehicle.Y_Point, _yPoint);
 
-            Assert.AreEqual(oldPosition, _vehicle.X_Point);
         }
-
 
         [Test]
-        public void VehicleWestOrientedGoesBackward_ButIsAlreadyInTheLimit_ThenCannotMove()
+        public void VehicleNorthOrientedGoesForward_ButThereAreObstacles_ThenCannotMove()
         {
-            //Arrange
-            _vehicle = new Vehicle(0, 0, new WestDirection());
-            int oldPosition = _vehicle.Y_Point;
+            //
+            _direction = new NorthDirection();
+            _vehicle = new Vehicle(_xPoint, _yPoint, _direction);
+            _controlLogic = new ControlLogic(_vehicle, _permissiveLimits, _obstaclesWithItems);
 
             //Act
-            _vehicle.MoveBackward();
+            _controlLogic.ExecuteCommands(_commandList);
 
             //Assert
+            Assert.AreEqual(_vehicle.X_Point, _xPoint);
+            Assert.AreEqual(_vehicle.Y_Point, _yPoint);
 
-            Assert.AreEqual(oldPosition, _vehicle.X_Point);
         }
+
+        [Test]
+        public void VehicleSouthOrientedGoesForward_ButThereAreObstacles_ThenCannotMove()
+        {
+            //
+            _direction = new SouthDirection();
+            _vehicle = new Vehicle(_xPoint, _yPoint, _direction);
+            _controlLogic = new ControlLogic(_vehicle, _permissiveLimits, _obstaclesWithItems);
+
+            //Act
+            _controlLogic.ExecuteCommands(_commandList);
+
+            //Assert
+            Assert.AreEqual(_vehicle.X_Point, _xPoint);
+            Assert.AreEqual(_vehicle.Y_Point, _yPoint);
+
+        }
+
+        [Test]
+        public void VehicleEastOrientedGoesForward_ButThereAreObstacles_ThenCannotMove()
+        {
+            //
+            _direction = new EastDirection();
+            _vehicle = new Vehicle(_xPoint, _yPoint, _direction);
+            _controlLogic = new ControlLogic(_vehicle, _permissiveLimits, _obstaclesWithItems);
+
+            //Act
+            _controlLogic.ExecuteCommands(_commandList);
+
+            //Assert
+            Assert.AreEqual(_vehicle.X_Point, _xPoint);
+            Assert.AreEqual(_vehicle.Y_Point, _yPoint);
+
+        }
+
+        [Test]
+        public void VehicleWestOrientedGoesForward_ButThereAreObstacles_ThenCannotMove()
+        {
+            //
+            _direction = new WestDirection();
+            _vehicle = new Vehicle(_xPoint, _yPoint, _direction);
+            _controlLogic = new ControlLogic(_vehicle, _permissiveLimits, _obstaclesWithItems);
+
+            //Act
+            _controlLogic.ExecuteCommands(_commandList);
+
+            //Assert
+            Assert.AreEqual(_vehicle.X_Point, _xPoint);
+            Assert.AreEqual(_vehicle.Y_Point, _yPoint);
+
+        }
+
+
+
+
 
     }
 }
