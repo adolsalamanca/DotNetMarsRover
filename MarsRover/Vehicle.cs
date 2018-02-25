@@ -11,17 +11,14 @@ namespace MarsRover
     {
         public int X_Point { get; set; }
         public int Y_Point { get; set; }
-
         private IDirection _direction;
-        private Coordinates _orientation;
         private readonly EdgeLimits _limits;
 
-        public Vehicle(int xPoint, int yPoint, IDirection direction, Coordinates orientation, EdgeLimits limits)
+        public Vehicle(int xPoint, int yPoint, IDirection direction, EdgeLimits limits)
         {
             X_Point = xPoint;
             Y_Point = yPoint;
             _direction = direction;
-            _orientation = orientation;
             _limits = limits;
         }
 
@@ -42,26 +39,6 @@ namespace MarsRover
         public void TurnRight()
         {
         }
-
-        private void MoveLogic()
-        {
-            switch (_orientation)
-            {
-                case Coordinates.North:
-                    break;
-                case Coordinates.South:
-                    break;
-                case Coordinates.East:
-                    break;
-                case Coordinates.West:
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-        }
-
-
-
 
     }
 }
