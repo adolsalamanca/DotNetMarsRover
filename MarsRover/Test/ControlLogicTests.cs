@@ -31,12 +31,13 @@ namespace MarsRover.Test
                 new Obstacle(0,1),
                 new Obstacle(1,0),
                 new Obstacle(0,-1),
-                new Obstacle(0,-1)
+                new Obstacle(-1,0)
             };
 
             _permissiveLimits = new EdgeLimits(8888, 8888, 8888, 8888);
             _commandList = new List<Command>()
             {
+                Command.F,
                 Command.F,
                 Command.B,
             };
