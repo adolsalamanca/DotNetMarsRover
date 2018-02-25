@@ -54,7 +54,7 @@ namespace MarsRover.Test
        [Test]
         public void VehicleNorthOrientedGoesForward_ButIsAlreadyInTheLimit_ThenCannotMove()
         {
-            //
+            //Arrange
             _direction = new NorthDirection();
             _vehicle = new Vehicle(_xPoint, _yPoint, _direction);
             _controlLogic = new ControlLogic(_vehicle, _restrictiveLimits, _obstaclesEmptyList);
@@ -71,7 +71,7 @@ namespace MarsRover.Test
         [Test]
         public void VehicleSouthOrientedGoesForward_ButIsAlreadyInTheLimit_ThenCannotMove()
         {
-            //
+            //Arrange
             _direction = new SouthDirection();
             _vehicle = new Vehicle(_xPoint, _yPoint, _direction);
             _controlLogic = new ControlLogic(_vehicle, _restrictiveLimits, _obstaclesEmptyList);
@@ -88,7 +88,7 @@ namespace MarsRover.Test
         [Test]
         public void VehicleEastOrientedGoesForward_ButIsAlreadyInTheLimit_ThenCannotMove()
         {
-            //
+            //Arrange
             _direction = new EastDirection();
             _vehicle = new Vehicle(_xPoint, _yPoint, _direction);
             _controlLogic = new ControlLogic(_vehicle, _restrictiveLimits, _obstaclesEmptyList);
@@ -105,7 +105,7 @@ namespace MarsRover.Test
         [Test]
         public void VehicleWestOrientedGoesForward_ButIsAlreadyInTheLimit_ThenCannotMove()
         {
-            //
+            //Arrange
             _direction = new WestDirection();
             _vehicle = new Vehicle(_xPoint, _yPoint, _direction);
             _controlLogic = new ControlLogic(_vehicle, _restrictiveLimits, _obstaclesEmptyList);
@@ -122,7 +122,7 @@ namespace MarsRover.Test
         [Test]
         public void VehicleNorthOrientedGoesForward_ButThereAreObstacles_ThenCannotMove()
         {
-            //
+            //Arrange
             _direction = new NorthDirection();
             _vehicle = new Vehicle(_xPoint, _yPoint, _direction);
             _controlLogic = new ControlLogic(_vehicle, _permissiveLimits, _obstaclesWithItems);
@@ -139,7 +139,7 @@ namespace MarsRover.Test
         [Test]
         public void VehicleSouthOrientedGoesForward_ButThereAreObstacles_ThenCannotMove()
         {
-            //
+            //Arrange
             _direction = new SouthDirection();
             _vehicle = new Vehicle(_xPoint, _yPoint, _direction);
             _controlLogic = new ControlLogic(_vehicle, _permissiveLimits, _obstaclesWithItems);
@@ -156,7 +156,7 @@ namespace MarsRover.Test
         [Test]
         public void VehicleEastOrientedGoesForward_ButThereAreObstacles_ThenCannotMove()
         {
-            //
+            //Arrange
             _direction = new EastDirection();
             _vehicle = new Vehicle(_xPoint, _yPoint, _direction);
             _controlLogic = new ControlLogic(_vehicle, _permissiveLimits, _obstaclesWithItems);
@@ -173,7 +173,7 @@ namespace MarsRover.Test
         [Test]
         public void VehicleWestOrientedGoesForward_ButThereAreObstacles_ThenCannotMove()
         {
-            //
+            //Arrange
             _direction = new WestDirection();
             _vehicle = new Vehicle(_xPoint, _yPoint, _direction);
             _controlLogic = new ControlLogic(_vehicle, _permissiveLimits, _obstaclesWithItems);
@@ -188,8 +188,67 @@ namespace MarsRover.Test
         }
 
 
+        [Test]
+        public void VehicleNorthOrientedGoesForward_ButIsNotInTheLimit_ThenItCanMove()
+        {
+            //Arrange
+            _direction = new NorthDirection();
+            _vehicle = new Vehicle(_xPoint, _yPoint, _direction);
+            _controlLogic = new ControlLogic(_vehicle, _permissiveLimits, _obstaclesEmptyList);
 
+            //Act
+            _controlLogic.ExecuteCommands(_commandList);
 
+            //Assert
+            Assert.AreNotEqual(_vehicle.Y_Point, _yPoint);
 
+        }
+
+        [Test]
+        public void VehicleSouthOrientedGoesForward_ButIsNotInTheLimit_ThenItCanMove()
+        {
+            //Arrange
+            _direction = new SouthDirection();
+            _vehicle = new Vehicle(_xPoint, _yPoint, _direction);
+            _controlLogic = new ControlLogic(_vehicle, _permissiveLimits, _obstaclesEmptyList);
+
+            //Act
+            _controlLogic.ExecuteCommands(_commandList);
+
+            //Assert
+            Assert.AreNotEqual(_vehicle.Y_Point, _yPoint);
+        }
+
+        [Test]
+        public void VehicleEastOrientedGoesForward_ButIsNotInTheLimit_ThenItCanMove()
+        {
+            //Arrange
+            _direction = new EastDirection();
+            _vehicle = new Vehicle(_xPoint, _yPoint, _direction);
+            _controlLogic = new ControlLogic(_vehicle, _permissiveLimits, _obstaclesEmptyList);
+
+            //Act
+            _controlLogic.ExecuteCommands(_commandList);
+
+            //Assert
+            Assert.AreNotEqual(_vehicle.X_Point, _xPoint);
+
+        }
+
+        [Test]
+        public void VehicleWestOrientedGoesForward_ButIsNotInTheLimit_ThenItCanMove()
+        {
+            //Arrange
+            _direction = new WestDirection();
+            _vehicle = new Vehicle(_xPoint, _yPoint, _direction);
+            _controlLogic = new ControlLogic(_vehicle, _permissiveLimits, _obstaclesEmptyList);
+
+            //Act
+            _controlLogic.ExecuteCommands(_commandList);
+
+            //Assert
+            Assert.AreNotEqual(_vehicle.X_Point, _xPoint);
+
+        }
     }
 }
