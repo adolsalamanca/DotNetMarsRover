@@ -8,7 +8,6 @@ namespace MarsRover.Test
     public class VehicleTurnTests
     {
         private int _xPoint, _yPoint;
-        private Coordinates _orientation;
         private EdgeLimits _limits;
         private Vehicle _vehicle;
 
@@ -30,62 +29,114 @@ namespace MarsRover.Test
         }
 
         [Test]
-        public void VehicleTurnLeft__IfIsNorthOriented_ThenGoesLeft()
+        public void VehicleTurnLeft__IfIsNorthOriented_ThenTurnsLeft()
         {
             //Arrange
-            _orientation = Coordinates.North;
-            _vehicle = new Vehicle(_xPoint, _yPoint, new NorthDirection(), _orientation, _limits);
+            _vehicle = new Vehicle(_xPoint, _yPoint, new NorthDirection(), _limits);
 
             //Act
-            _vehicle.MoveForward();
-
-            //Assert
-            Assert.IsTrue(_vehicle.Y_Point == _yPoint+1);
+            _vehicle.TurnLeft();
             
-        }
-
-        [Test]
-        public void VehicleTurnRight__IfIsNorthOriented_ThenGoesRight()
-        {
-            //Arrange
-            _orientation = Coordinates.South;
-            _vehicle = new Vehicle(_xPoint, _yPoint, new NorthDirection(), _orientation, _limits);
-
-            //Act
-            _vehicle.MoveBackward();
-
             //Assert
-            Assert.IsTrue(_vehicle.Y_Point == _yPoint -1);
+            Assert.IsInstanceOf(typeof(WestDirection), _vehicle.Direction);
 
         }
 
         [Test]
-        public void VehicleTurnLeft__IfIsSouthOriented_ThenGoesRight()
+        public void VehicleTurnRight__IfIsNorthOriented_ThenTurnsRight()
         {
             //Arrange
-            _orientation = Coordinates.South;
-            _vehicle = new Vehicle(_xPoint, _yPoint, new SouthDirection(), _orientation, _limits);
+            _vehicle = new Vehicle(_xPoint, _yPoint, new NorthDirection(), _limits);
 
             //Act
-            _vehicle.MoveForward();
+            _vehicle.TurnRight();
 
             //Assert
-            Assert.IsTrue(_vehicle.Y_Point == _yPoint - 1);
+            Assert.IsInstanceOf(typeof(EastDirection), _vehicle.Direction);
 
         }
 
         [Test]
-        public void VehicleTurnRight__IfIsSouthOriented_ThenGoesLeft()
+        public void VehicleTurnLeft__IfIsSouthOriented_ThenTurnsRight()
         {
             //Arrange
-            _orientation = Coordinates.South;
-            _vehicle = new Vehicle(_xPoint, _yPoint, new SouthDirection(), _orientation, _limits);
+            _vehicle = new Vehicle(_xPoint, _yPoint, new SouthDirection(), _limits);
 
             //Act
-            _vehicle.MoveBackward();
+            _vehicle.TurnLeft();
 
             //Assert
-            Assert.IsTrue(_vehicle.Y_Point == _yPoint + 1);
+            Assert.IsInstanceOf(typeof(EastDirection), _vehicle.Direction);
+
+        }
+
+        [Test]
+        public void VehicleTurnRight__IfIsSouthOriented_ThenTurnsLeft()
+        {
+            //Arrange
+            _vehicle = new Vehicle(_xPoint, _yPoint, new SouthDirection(), _limits);
+
+            //Act
+            _vehicle.TurnRight();
+
+            //Assert
+            Assert.IsInstanceOf(typeof(WestDirection), _vehicle.Direction);
+
+        }
+
+        [Test]
+        public void VehicleTurnLeft__IfIsEastOriented_ThenTurnsUp()
+        {
+            //Arrange
+            _vehicle = new Vehicle(_xPoint, _yPoint, new EastDirection(), _limits);
+
+            //Act
+            _vehicle.TurnLeft();
+
+            //Assert
+            Assert.IsInstanceOf(typeof(NorthDirection), _vehicle.Direction);
+
+        }
+
+        [Test]
+        public void VehicleTurnRight__IfIsEastOriented_ThenTurnsDownLeft()
+        {
+            //Arrange
+            _vehicle = new Vehicle(_xPoint, _yPoint, new EastDirection(), _limits);
+
+            //Act
+            _vehicle.TurnRight();
+
+            //Assert
+            Assert.IsInstanceOf(typeof(SouthDirection), _vehicle.Direction);
+
+        }
+
+        [Test]
+        public void VehicleTurnLeft__IfIsWestOriented_ThenTurnsDown()
+        {
+            //Arrange
+            _vehicle = new Vehicle(_xPoint, _yPoint, new EastDirection(), _limits);
+
+            //Act
+            _vehicle.TurnLeft();
+
+            //Assert
+            Assert.IsInstanceOf(typeof(SouthDirection), _vehicle.Direction);
+
+        }
+
+        [Test]
+        public void VehicleTurnRight__IfIsWestOriented_ThenTurnsDownUp()
+        {
+            //Arrange
+            _vehicle = new Vehicle(_xPoint, _yPoint, new EastDirection(), _limits);
+
+            //Act
+            _vehicle.TurnRight();
+
+            //Assert
+            Assert.IsInstanceOf(typeof(NorthDirection), _vehicle.Direction);
 
         }
     }
