@@ -1,4 +1,5 @@
 ﻿   
+using MarsRover.Direction;
 using NUnit.Framework;
 
 namespace MarsRover.Test
@@ -17,7 +18,6 @@ namespace MarsRover.Test
             _xPoint = 123;
             _yPoint = 567;
             _limits = new EdgeLimits(8888,8888,8888,8888);
-
         }
 
         [TearDown]
@@ -30,12 +30,11 @@ namespace MarsRover.Test
         }
 
         [Test]
-
         public void VehicleGoesUp__IfIsNorthOriented_AndGoesForward()
         {
             //Arrange
             _orientation = Coordinates.North;
-            _vehicle = new Vehicle(_xPoint, _yPoint, _orientation, _limits);
+            _vehicle = new Vehicle(_xPoint, _yPoint, new NorthDirection(), _orientation, _limits);
 
             //Act
             _vehicle.MoveForward();
@@ -45,20 +44,49 @@ namespace MarsRover.Test
             
         }
 
+        [Test]
         public void VehicleGoesDown__IfIsNorthOriented_AndGoesBackward()
         {
             //Arrange
             _orientation = Coordinates.South;
-            _vehicle = new Vehicle(_xPoint, _yPoint, _orientation, _limits);
+            _vehicle = new Vehicle(_xPoint, _yPoint, new NorthDirection(), _orientation, _limits);
 
             //Act
-            _vehicle.MoveForward();
+            _vehicle.MoveBackward();
 
             //Assert
             Assert.IsTrue(_vehicle.Y_Point == _yPoint -1);
 
         }
 
+        [Test]
+        public void VehicleGoesDown__IfIsSouthOriented_AndGoesForward()
+        {
+            //Arrange
+            _orientation = Coordinates.South;
+            _vehicle = new Vehicle(_xPoint, _yPoint, new SouthDirection(), _orientation, _limits);
 
+            //Act
+            _vehicle.MoveForward();
+
+            //Assert
+            Assert.IsTrue(_vehicle.Y_Point == _yPoint - 1);
+
+        }
+
+        [Test]
+        public void VehicleGoesUp__IfIsSouthOriented_AndGoesBackward()
+        {
+            //Arrange
+            _orientation = Coordinates.South;
+            _vehicle = new Vehicle(_xPoint, _yPoint, new SouthDirection(), _orientation, _limits);
+
+            //Act
+            _vehicle.MoveBackward();
+
+            //Assert
+            Assert.IsTrue(_vehicle.Y_Point == _yPoint + 1);
+
+        }
     }
 }
